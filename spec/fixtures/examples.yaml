@@ -1,0 +1,60 @@
+headers:
+  Content-Type: application/json; charset=utf-8
+  X-List-TotalCount: "1"
+  Link: </v1/examples?page=2&per_page=1>; rel="next"
+body: |
+  [
+    {
+               "id": 1,
+          "created": "2000-01-01T00:00:00+09:00",
+          "updated": "2000-01-01T00:00:00+09:00",
+             "name": "recipe title",
+              "url": "http://example.com/examples/1",
+             "user": {
+                   "id": 2294,
+                  "url": "http://example.com/kitchen/2294",
+                 "name": "Fern1",
+               "_links": {
+                          "self": {
+                   "href": "/v1/users/2294"
+                 },
+                     "bookmarks": {
+                   "href": "/v1/users/2294/bookmarks"
+                 },
+                 "bookmark_tags": {
+                   "href": "/v1/users/2294/bookmark_tags"
+                 },
+                     "canonical": {
+                   "href": "/v1/users/2294"
+                 },
+                 "diary_entries": {
+                   "href": "/v1/users/2294/diary_entries"
+                 },
+                     "feedbacks": {
+                   "href": "/v1/users/2294/feedbacks"
+                 },
+                       "recipes": {
+                   "href": "/v1/users/2294/recipes"
+                 }
+               }
+             },
+      "descriptien": "this is my favorite recipe.",
+          "serving": null,
+        "published": "2000-01-01T00:00:00+09:00",
+           "edited": null,
+             "tier": "example.com:User",
+      "ingredients": [],
+            "steps": [],
+           "_links": {
+             "self": {
+          "href": "/examples/1"
+        },
+        "canonical": {
+          "href": "/examples/1"
+        },
+        "nested_examples": {
+          "href": "/examples/1/nested_examples"
+        }
+      }
+    }
+  ]

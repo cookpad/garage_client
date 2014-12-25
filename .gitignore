@@ -1,0 +1,8 @@
+*.gem
+.bundle
+Gemfile.lock
+pkg/*
+coverage/
+coverage.vim
+.ruby-version
+gemfiles/*.lock
