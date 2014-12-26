@@ -1,6 +1,16 @@
 language: ruby
+
 rvm:
+  - ruby-head
+  - 2.2
   - 2.1
-  - 2.0
-notifications:
-  email: false
+  - 2.0.0
+matrix:
+  allow_failures:
+    - rvm:
+      - "ruby-head"
+  fast_finish: true
+
+cache: bundler
+
+sudo: false
