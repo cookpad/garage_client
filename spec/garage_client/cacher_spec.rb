@@ -61,4 +61,33 @@ describe GarageClient::Cachers::Base do
       end
     end
   end
+
+  # Check dump data. Because cache data not broken on the version up of faraday.
+  describe "check Faraday::Response marshal" do
+    specify do
+      expect(Faraday::VERSION).to be < "1.0.0", "This spec is no longer needed. Delete this 'describe' section!"
+    end
+
+    context "v0.9.1's marshal data" do
+      let(:res) do
+        Marshal.load(File.read(File.expand_path('../fixtures/faraday_0.9.1_response.dump', __dir__)))
+      end
+
+      it "load data" do
+        expect(res).to be_instance_of Faraday::Response
+        expect(res.env[:body]).to eq fixture("example.yaml")[:body]
+      end
+    end
+
+    context "v0.8.9's marshal data" do
+      let(:res) do
+        Marshal.load(File.read(File.expand_path('../fixtures/faraday_0.8.9_response.dump', __dir__)))
+      end
+
+      it "load data" do
+        expect(res).to be_instance_of Faraday::Response
+        expect(res.env[:body]).to eq fixture("example.yaml")[:body]
+      end
+    end
+  end
 end
