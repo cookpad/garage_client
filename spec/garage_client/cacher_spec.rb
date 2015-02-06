@@ -8,11 +8,12 @@ describe GarageClient::Cachers::Base do
       end
 
       def read(key, options = {})
-        @table[key]
+        value = @table[key]
+        Marshal.load(value) if value
       end
 
       def write(key, value, options = {})
-        @table[key] = value
+        @table[key] = Marshal.dump(value)
       end
     end.new
   end

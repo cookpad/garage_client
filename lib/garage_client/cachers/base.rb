@@ -7,8 +7,15 @@ module GarageClient
       end
 
       def call
-        response = read_from_cache? && store.read(key, options) || yield
-        store.write(key, response, options) if written_to_cache?
+        response = store.read(key, options) if read_from_cache?
+        if response
+          # Faraday::Response#marshal_dump is drop request object and url
+          # https://github.com/lostisland/faraday/blob/edacd5eb57ea13accab3097649690ae5f48f421a/lib/faraday/response.rb#L74
+          response.env.merge!(@env) {|_, self_val, other_val| self_val || other_val }
+        else
+          response = yield
+          store.write(key, response, options) if written_to_cache?
+        end
         response
       end
 
