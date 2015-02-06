@@ -15,12 +15,12 @@ module GarageClient
       private
 
       # Return boolean to tell if we need to cache the response or not.
-      def allowed_to_read_cache?
+      def read_from_cache?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
       # Return boolean to tell if we can try to check cache or not.
-      def allowed_to_write_cache?
+      def written_to_cache?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
