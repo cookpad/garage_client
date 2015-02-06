@@ -1,13 +1,33 @@
 require "spec_helper"
 
 describe GarageClient::Cachers::Base do
-  let(:client) do
-    GarageClient::Client.new(cacher: cacher_class)
+  let(:store) do
+    Class.new do
+      def initialize
+        @table = {}
+      end
+
+      def read(key, options = {})
+        @table[key]
+      end
+
+      def write(key, value, options = {})
+        @table[key] = value
+      end
+    end.new
   end
 
   let(:cacher_class) do
-    store = store
+    cache_store = store
     Class.new(GarageClient::Cachers::Base) do
+      @store = cache_store
+
+      class << self
+        attr_reader :store
+      end
+
+      delegate :store, to: :class
+
       private
 
       def key
@@ -21,30 +41,18 @@ describe GarageClient::Cachers::Base do
       def written_to_cache?
         true
       end
-
-      def store
-        Class.new do
-          def initialize
-            @table = {}
-          end
-
-          def read(key, options = {})
-            @table[key]
-          end
-
-          def write(key, value, options = {})
-            @table[key] = value
-          end
-        end.new
-      end
     end
+  end
+
+  let(:client) do
+    GarageClient::Client.new(cacher: cacher_class)
   end
 
   describe "caching" do
     context "with cache-enabled GarageClient::Client" do
       it "caches response along passed cacher class" do
-        stub_get("/examples").to_return(fixture("examples.yaml")).times(1)
-        stub_get("/example").to_return(fixture("example.yaml")).times(1)
+        stub_get("/examples").to_return(fixture("examples.yaml")).times(1).then.to_raise("Not use Cache.")
+        stub_get("/example").to_return(fixture("example.yaml")).times(1).then.to_raise("Not use Cache.")
         client.get("/examples").body.should be_a Array
         client.get("/examples").body.should be_a Array
         client.get("/example").body.should be_a GarageClient::Resource
