@@ -7,20 +7,27 @@ module GarageClient
       end
 
       def call
-        response = read_from_cache? && store.read(key, options) || yield
-        store.write(key, response, options) if written_to_cache?
+        response = store.read(key, options) if read_from_cache?
+        if response
+          # Faraday::Response#marshal_dump is drop request object and url
+          # https://github.com/lostisland/faraday/blob/edacd5eb57ea13accab3097649690ae5f48f421a/lib/faraday/response.rb#L74
+          response.env.merge!(@env) {|_, self_val, other_val| self_val || other_val }
+        else
+          response = yield
+          store.write(key, response, options) if written_to_cache?
+        end
         response
       end
 
       private
 
       # Return boolean to tell if we need to cache the response or not.
-      def allowed_to_read_cache?
+      def read_from_cache?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
       # Return boolean to tell if we can try to check cache or not.
-      def allowed_to_write_cache?
+      def written_to_cache?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
