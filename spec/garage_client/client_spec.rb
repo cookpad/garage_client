@@ -4,6 +4,24 @@ describe GarageClient::Client do
   let(:client) { GarageClient::Client.new(options) }
   let(:options) { {} }
 
+  describe 'laziness of properties' do
+    before { allow(GarageClient.configuration).to receive(:endpoint).and_raise('error') }
+
+    context 'when is specified options' do
+      let(:options) { { endpoint: 'http://example.com' } }
+
+      it 'does not evaluate global configuration' do
+        expect { client.endpoint }.not_to raise_error
+      end
+    end
+
+    context 'when is not specified options' do
+      it 'evaluates global configuration' do
+        expect { client.endpoint }.to raise_error('error')
+      end
+    end
+  end
+
   describe "#adapter" do
     context "without :adapter option value" do
       it "returns default value" do
