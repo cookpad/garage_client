@@ -4,7 +4,7 @@ module GarageClient
 
     def self.property(key)
       define_method(key) do
-        options.fetch(key, GarageClient.configuration.send(key))
+        options.fetch(key) { GarageClient.configuration.send(key) }
       end
 
       define_method("#{key}=") do |value|
