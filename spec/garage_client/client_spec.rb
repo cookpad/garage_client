@@ -135,8 +135,8 @@ describe GarageClient::Client do
 
   describe "#endpoint=" do
     it "overwrites it" do
-      client.adapter = "http://example.com"
-      client.adapter.should == "http://example.com"
+      client.endpoint = "http://example.com"
+      client.endpoint.should == "http://example.com"
     end
   end
 
