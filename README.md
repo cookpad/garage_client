@@ -123,6 +123,7 @@ GarageClient raises one of the following exceptions upon an error.
 Make sure to always look out for these in your code.
 
 ```ruby
+GarageClient::BadRequest
 GarageClient::Unauthorized
 GarageClient::Forbidden
 GarageClient::NotFound
