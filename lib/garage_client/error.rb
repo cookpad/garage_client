@@ -19,6 +19,7 @@ module GarageClient
   end
 
   # HTTP level
+  class BadRequest < Error; end
   class Unauthorized < Error; end
   class Forbidden < Error; end
   class NotFound < Error; end

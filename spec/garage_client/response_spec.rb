@@ -409,6 +409,7 @@ describe Faraday::Response do
 
   describe 'http errors' do
     {
+      400 => GarageClient::BadRequest,
       401 => GarageClient::Unauthorized,
       403 => GarageClient::Forbidden,
       404 => GarageClient::NotFound,
