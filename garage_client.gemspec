@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'hashie', '>= 1.2.0'
   s.add_dependency 'link_header'
-  s.add_dependency 'mime-types', '~> 1.16'
 
   s.add_dependency 'system_timer' if RUBY_VERSION < '1.9'
 
