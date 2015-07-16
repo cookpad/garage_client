@@ -24,6 +24,7 @@ module GarageClient
         request.url(path, params)
         request.body = body if body
         request.headers.update(options[:headers]) if options[:headers]
+        request.options.update(options[:request]) if options[:request]
       end
       options[:raw] ? response : GarageClient::Response.new(self, response)
     end

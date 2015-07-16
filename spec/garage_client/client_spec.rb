@@ -243,4 +243,48 @@ describe GarageClient::Client do
       end
     end
   end
+
+  describe '#request_options' do
+    around do |example|
+      begin
+        old, GarageClient.request = GarageClient.request, nil
+        example.run
+      ensure
+        GarageClient.request = old
+      end
+    end
+
+    context 'in default' do
+      it 'returns nil' do
+        expect(client.request_options).to be_nil
+      end
+    end
+
+    context 'when request options configured' do
+      before do
+        GarageClient.request = { timeout: 5 }
+      end
+      it 'returns configured value' do
+        expect(client.request_options).to eq(timeout: 5)
+      end
+    end
+
+    context 'when is specified options' do
+      let(:options) { { request: { timeout: 10 } } }
+
+      it 'returns specified value' do
+        expect(client.request_options).to eq(timeout: 10)
+      end
+    end
+  end
+
+  describe '#request_options=' do
+    let(:request_options) { { request: { timeout: 10 } } }
+
+    it 'overwrites it' do
+      expect {
+        client.request_options = request_options
+      }.to change { client.request_options }.from(nil).to(request_options)
+    end
+  end
 end

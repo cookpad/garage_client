@@ -96,6 +96,7 @@ There are the following options:
 - `endpoint` - Garage application API endpoint (default: nil)
 - `path_prefix` - API path prefix (default: `'/v1'`)
 - `verbose` - Enable verbose http log (default: `false`)
+- `request` - default http request options (Faraday::RequestOptions ```:params_encoder, :proxy, :bind, :timeout, :open_timeout, :boundary```)
 
 You can configure the global settings:
 
@@ -103,6 +104,7 @@ You can configure the global settings:
 GarageClient.configure do |c|
   c.endpoint = "http://localhost:3000"
   c.verbose = true
+  c.request = { timeout: 5 }
 end
 ```
 
@@ -115,8 +117,16 @@ client = GarageClient::Client.new(
   endpoint: "http://localhost:3000",
   path_prefix: "/v2",
   verbose: true,
+  request: { timeout: 3 },
 )
 ```
+
+or each request settings:
+
+```ruby
+client.post("/touch", "touch message", headers: { 'User-Agent' => 'garage_client_ext' }, request: { timeout: 1 })
+```
+
 
 ## Exceptions
 GarageClient raises one of the following exceptions upon an error.

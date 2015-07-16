@@ -103,4 +103,22 @@ describe GarageClient::Configuration do
       end
     end
   end
+
+  describe '#request' do
+    context 'in default configuration' do
+      it 'returns nil' do
+        expect(configuration.request).to be_nil
+      end
+    end
+
+    context 'after configured' do
+      before do
+        configuration.request = { timeout: 3 }
+      end
+
+      it 'returns configured value' do
+        expect(configuration.request).to eq(timeout: 3)
+      end
+    end
+  end
 end

@@ -9,6 +9,7 @@ module GarageClient
       },
       path_prefix: '/v1',
       verbose: false,
+      request: nil,
     }
 
     def self.keys

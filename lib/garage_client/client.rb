@@ -56,7 +56,7 @@ module GarageClient
     end
 
     def connection
-      Faraday.new(headers: headers, url: endpoint) do |builder|
+      Faraday.new(headers: headers, url: endpoint, request: request_options) do |builder|
         # Response Middlewares
         builder.use Faraday::Response::Logger if verbose
         builder.use FaradayMiddleware::Mashify
@@ -72,6 +72,14 @@ module GarageClient
         apply_auth_middleware builder
         builder.adapter(*adapter)
       end
+    end
+
+    def request_options
+      options[:request] || default_options.options[:request]
+    end
+
+    def request_options=(value)
+      options[:request] = value
     end
 
     private
