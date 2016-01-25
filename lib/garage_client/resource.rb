@@ -52,8 +52,8 @@ module GarageClient
       end
     end
 
-    def respond_to?(name)
-      super || !!(properties.include?(name) || links.include?(name) || nested_resource_creation_method?(name))
+    def respond_to_missing?(name, include_private)
+      !!(properties.include?(name) || links.include?(name) || nested_resource_creation_method?(name))
     end
 
     def nested_resource_creation_method?(name)
