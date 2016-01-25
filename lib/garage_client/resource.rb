@@ -48,7 +48,7 @@ module GarageClient
         path = data._links[name.to_s.sub(/create_/, '')].href
         client.post(path, *args)
       else
-        super
+        raise NoMethodError.new("undefined method `#{name}' for #{data}")
       end
     end
 

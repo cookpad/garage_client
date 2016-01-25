@@ -105,11 +105,7 @@ module GarageClient
     private
 
     def method_missing(name, *args, &block)
-      if body.respond_to?(name)
-        body.send(name, *args, &block)
-      else
-        super
-      end
+      body.send(name, *args, &block)
     end
 
     def dictionary_response?
