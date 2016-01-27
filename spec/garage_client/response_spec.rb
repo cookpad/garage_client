@@ -72,6 +72,24 @@ describe GarageClient::Response do
     end
   end
 
+  describe "#method" do
+    context "with same property" do
+      before do
+        body["name"] = "example"
+      end
+
+      it "returns method object" do
+        response.method(:name).should be_kind_of(Method)
+      end
+    end
+
+    context "with neithor same property nor same method" do
+      it "raises an error" do
+        expect { response.method(:name) }.to raise_error(NameError)
+      end
+    end
+  end
+
   describe "#has_next_page?" do
     context "without Link header" do
       before do

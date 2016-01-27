@@ -98,8 +98,8 @@ module GarageClient
       parsed_link_header.try(:find_link, %w[rel last])
     end
 
-    def respond_to?(name, *args)
-      super || body.respond_to?(name, *args)
+    def respond_to_missing?(name, include_private)
+      body.respond_to?(name, include_private)
     end
 
     private
