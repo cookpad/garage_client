@@ -24,6 +24,8 @@ module GarageClient
         request.url(path, params)
         request.body = body if body
         request.headers.update(options[:headers]) if options[:headers]
+        request.options.timeout = options[:timeout] if options[:timeout]
+        request.options.open_timeout = options[:open_timeout] if options[:open_timeout]
       end
       options[:raw] ? response : GarageClient::Response.new(self, response)
     end
