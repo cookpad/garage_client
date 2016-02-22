@@ -27,6 +27,8 @@ module GarageClient
   class Conflict < Error; end
   class UnsupportedMediaType < Error; end
   class UnprocessableEntity < Error; end
+  class ClientError < Error; end
+  class ServerError < Error; end
 
   # Remote Server
   class InternalServerError < Error; end

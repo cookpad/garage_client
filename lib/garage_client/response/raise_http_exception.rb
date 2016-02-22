@@ -4,6 +4,9 @@ require 'faraday_middleware'
 module GarageClient
   class Response
     class RaiseHttpException < Faraday::Response::Middleware
+      ClientErrorStatuses = 400...500
+      ServerErrorStatuses = 500...600
+
       def call(env)
         @app.call(env).on_complete do |response|
           resp = response
@@ -28,6 +31,10 @@ module GarageClient
             raise GarageClient::InternalServerError.new(resp)
           when 503
             raise GarageClient::ServiceUnavailable.new(resp)
+          when ClientErrorStatuses
+            raise GarageClient::ClientError.new(resp)
+          when ServerErrorStatuses
+            raise GarageClient::ServerError.new(resp)
           end
         end
       end
