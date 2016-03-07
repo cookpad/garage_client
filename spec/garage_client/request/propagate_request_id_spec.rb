@@ -5,8 +5,11 @@ describe GarageClient::Request::PropagateRequestId do
     GarageClient::Client.new
   end
 
-  before do
+  around do |example|
+    original = Thread.current[:request_id]
     Thread.current[:request_id] = 'request_id'
+    example.run
+    Thread.current[:request_id] = original
   end
 
   it 'sends request_id via header' do
