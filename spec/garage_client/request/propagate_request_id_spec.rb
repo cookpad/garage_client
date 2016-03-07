@@ -36,7 +36,7 @@ describe GarageClient::Request::PropagateRequestId do
     end
 
     it 'does not overwrite request_id' do
-      stub_get("/examples").with(headers: { 'HTTP_X_REQUEST_ID' => 'another_id'})
+      stub_get("/examples").with(headers: { 'HTTP_X_REQUEST_ID' => 'another_id' })
       expect { client.get("/examples") }.not_to raise_error
     end
   end
