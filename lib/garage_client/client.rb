@@ -67,6 +67,7 @@ module GarageClient
         # Request Middlewares
         builder.use Faraday::Request::Multipart
         builder.use GarageClient::Request::JsonEncoded
+        builder.use GarageClient::Request::PassOverRequestId
 
         # Low-level Middlewares
         apply_auth_middleware builder
