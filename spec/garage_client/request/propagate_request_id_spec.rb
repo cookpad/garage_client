@@ -13,7 +13,7 @@ describe GarageClient::Request::PropagateRequestId do
   end
 
   it 'sends request_id via header' do
-    stub_get("/examples").with(headers: { 'HTTP_X_REQUEST_ID' => 'request_id'})
+    stub_get("/examples").with(headers: { 'HTTP_X_REQUEST_ID' => 'request_id' })
     expect { client.get("/examples") }.not_to raise_error
   end
 
