@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GarageClient::Request::PassOverRequestId do
+describe GarageClient::Request::PropagateRequestId do
   let(:client) do
     GarageClient::Client.new
   end
