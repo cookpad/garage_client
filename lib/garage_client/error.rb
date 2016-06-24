@@ -19,15 +19,15 @@ module GarageClient
   end
 
   # HTTP level
-  class BadRequest < Error; end
-  class Unauthorized < Error; end
-  class Forbidden < Error; end
-  class NotFound < Error; end
-  class NotAcceptable < Error; end
-  class Conflict < Error; end
-  class UnsupportedMediaType < Error; end
-  class UnprocessableEntity < Error; end
   class ClientError < Error; end
+  class BadRequest < ClientError; end
+  class Unauthorized < ClientError; end
+  class Forbidden < ClientError; end
+  class NotFound < ClientError; end
+  class NotAcceptable < ClientError; end
+  class Conflict < ClientError; end
+  class UnsupportedMediaType < ClientError; end
+  class UnprocessableEntity < ClientError; end
 
   # Remote Server
   class ServerError < Error; end
