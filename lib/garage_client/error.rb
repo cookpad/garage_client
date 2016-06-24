@@ -28,11 +28,11 @@ module GarageClient
   class UnsupportedMediaType < Error; end
   class UnprocessableEntity < Error; end
   class ClientError < Error; end
-  class ServerError < Error; end
 
   # Remote Server
-  class InternalServerError < Error; end
-  class ServiceUnavailable < Error; end
+  class ServerError < Error; end
+  class InternalServerError < ServerError; end
+  class ServiceUnavailable < ServerError; end
 
   # GarageClient Client
   class UnsupportedResource < Error; end
