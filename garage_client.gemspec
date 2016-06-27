@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake", ">= 0.9.2"
   s.add_development_dependency "rspec"
   s.add_development_dependency "json"
-  s.add_development_dependency "guard-rspec"
   s.add_development_dependency "webmock"
   s.add_development_dependency "pry"
   # Until bug fixed: https://github.com/colszowka/simplecov/issues/281
