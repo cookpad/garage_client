@@ -49,6 +49,9 @@ describe GarageClient::Request::JsonEncoded do
     end
 
     it "does nothing" do
+      # https://github.com/bblimke/webmock/commit/93ef063a043a222774fd339b3a56a428feab813f
+      pending 'webmock does not support matching body for multipart/form-data'
+
       stub_post("/examples").with(
         body: [
           "-------------RubyMultipartPost",
