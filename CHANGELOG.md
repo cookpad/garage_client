@@ -1,3 +1,10 @@
+## 2.2.0
+- Change all 4xx exceptions to be `GarageClient::ClientError`
+- Change all 5xx exceptions to be `GarageClient::ServerError`
+
+## 2.1.7
+- Append `HTTP_X_REQUEST_ID` header by `Thread.current[:request_id]`
+
 ## 2.1.6
 - Raise error on 4xx client errors or 5xx server errors.
 
