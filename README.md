@@ -92,7 +92,8 @@ There are the following options:
 
 - `adapter` - faraday adapter for http client (default: `:net_http`)
 - `cacher` - take a cacher class in which caching logic is defined (default: nil)
-- `headers` - default http headers (default: `{ "Accept" => "application/json", "User-Agent" => "garage_client #{VERSION}" }`)
+- `name` - Client's application name, which is embedded in User-Agent by default (default: nil)
+- `headers` - default http headers (default: `{ "Accept" => "application/json", "User-Agent" => "garage_client #{VERSION} #{name}" }`)
 - `endpoint` - Garage application API endpoint (default: nil)
 - `path_prefix` - API path prefix (default: `'/v1'`)
 - `verbose` - Enable verbose http log (default: `false`)
@@ -102,6 +103,7 @@ You can configure the global settings:
 ```ruby
 GarageClient.configure do |c|
   c.endpoint = "http://localhost:3000"
+  c.name = 'my-awesome-client'
   c.verbose = true
 end
 ```
@@ -113,6 +115,7 @@ client = GarageClient::Client.new(
   adapter: :test,
   headers: { "Host" => "garage.example.com" },
   endpoint: "http://localhost:3000",
+  name: 'my-awesome-client',
   path_prefix: "/v2",
   verbose: true,
 )

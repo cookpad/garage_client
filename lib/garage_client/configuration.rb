@@ -3,16 +3,12 @@ module GarageClient
     DEFAULTS = {
       adapter: :net_http,
       cacher: nil,
-      headers: {
-        'Accept' => 'application/json',
-        'User-Agent' => "garage_client #{GarageClient::VERSION}",
-      },
       path_prefix: '/v1',
       verbose: false,
     }
 
     def self.keys
-      DEFAULTS.keys + [:endpoint]
+      DEFAULTS.keys + [:endpoint, :headers]
     end
 
     def initialize(options = {})
@@ -43,6 +39,31 @@ module GarageClient
 
     def endpoint=(value)
       options[:endpoint] = value
+    end
+
+    def name
+      options[:name] or raise 'Configuration error: missing name'
+    end
+
+    def name=(value)
+      options[:name] = value
+    end
+
+    def default_user_agent
+      "garage_client #{GarageClient::VERSION} #{name}"
+    end
+
+    def headers
+      options.fetch(:headers) do
+        {
+          'Accept' => 'application/json',
+          'User-Agent' => default_user_agent,
+        }
+      end
+    end
+
+    def headers=(value)
+      options[:headers] = value
     end
 
     alias :default_headers :headers

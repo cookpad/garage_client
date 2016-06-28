@@ -110,7 +110,7 @@ describe GarageClient::Client do
         client.headers.should == {
           "Accept" => "application/json",
           "Content-Type" => "text/plain",
-          "User-Agent" => "garage_client #{GarageClient::VERSION}"
+          "User-Agent" => "garage_client #{GarageClient::VERSION} garage_client_spec"
         }
       end
     end
