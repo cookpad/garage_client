@@ -1,3 +1,6 @@
+## 2.3.0
+- Add new configuration parameter `name`, which is embedded in User-Agent by default
+
 ## 2.2.0
 - Change all 4xx exceptions to be `GarageClient::ClientError`
 - Change all 5xx exceptions to be `GarageClient::ServerError`
