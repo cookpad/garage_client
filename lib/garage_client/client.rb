@@ -85,6 +85,9 @@ module GarageClient
       if !options[:endpoint] && !default_options.endpoint
         raise "Missing endpoint configuration"
       end
+      if !options[:name] && !default_options.name
+        raise "Missing name configuration"
+      end
     end
 
     def default_options

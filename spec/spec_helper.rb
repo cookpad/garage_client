@@ -20,6 +20,7 @@ require 'garage_client'
 GarageClient.configure do |c|
   c.path_prefix = ''
   c.endpoint = "https://garage.example.com"
+  c.name = 'garage_client_spec'
 end
 
 # This workaround is strictly for stubbing purpose.

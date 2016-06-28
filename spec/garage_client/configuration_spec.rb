@@ -42,11 +42,23 @@ describe GarageClient::Configuration do
   end
 
   describe "#headers" do
+    context "name isn't configured" do
+      it "raises RuntimeError" do
+        expect { configuration.headers }.to raise_error(RuntimeError, /missing name/)
+      end
+    end
+
     context "in default configuration" do
+      let(:name) { 'configuration_spec' }
+
+      before do
+        configuration.name = name
+      end
+
       it "returns default headers as Hash" do
         configuration.headers.should == {
           "Accept" => "application/json",
-          "User-Agent" => "garage_client #{GarageClient::VERSION}",
+          "User-Agent" => "garage_client #{GarageClient::VERSION} #{name}",
         }
       end
     end
@@ -63,6 +75,10 @@ describe GarageClient::Configuration do
   end
 
   describe "#default_headers" do
+    before do
+      configuration.name = 'configuration_spec'
+    end
+
     it "returns configuration.headers" do
       configuration.default_headers.should == configuration.headers
     end

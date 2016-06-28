@@ -23,7 +23,7 @@ describe "Configuration of GarageClient" do
       prev = GarageClient.configuration
       GarageClient.instance_variable_set(
         :@configuration,
-        GarageClient::Configuration.new(endpoint: "https://garage.example.com")
+        GarageClient::Configuration.new(endpoint: "https://garage.example.com", name: "configuration_spec")
       )
 
       example.run
