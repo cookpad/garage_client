@@ -1,3 +1,6 @@
+## 2.2.1
+- Raise `GarageClient::GatewayTimeout` for 504 error
+
 ## 2.2.0
 - Change all 4xx exceptions to be `GarageClient::ClientError`
 - Change all 5xx exceptions to be `GarageClient::ServerError`
