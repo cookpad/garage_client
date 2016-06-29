@@ -33,6 +33,7 @@ module GarageClient
   class ServerError < Error; end
   class InternalServerError < ServerError; end
   class ServiceUnavailable < ServerError; end
+  class GatewayTimeout < ServerError; end
 
   # GarageClient Client
   class UnsupportedResource < Error; end

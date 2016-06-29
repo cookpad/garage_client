@@ -31,6 +31,8 @@ module GarageClient
             raise GarageClient::InternalServerError.new(resp)
           when 503
             raise GarageClient::ServiceUnavailable.new(resp)
+          when 504
+            raise GarageClient::GatewayTimeout.new(resp)
           when ClientErrorStatuses
             raise GarageClient::ClientError.new(resp)
           when ServerErrorStatuses
