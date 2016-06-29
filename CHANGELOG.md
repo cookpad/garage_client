@@ -1,5 +1,8 @@
-## 2.2.1
+## 2.3.1
 - Raise `GarageClient::GatewayTimeout` for 504 error
+
+## 2.3.0
+- Add `name` configuration to set application name to User-Agent
 
 ## 2.2.0
 - Change all 4xx exceptions to be `GarageClient::ClientError`
