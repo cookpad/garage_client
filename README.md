@@ -136,6 +136,7 @@ GarageClient::UnsupportedMediaType
 GarageClient::UnprocessableEntity
 GarageClient::InternalServerError
 GarageClient::ServiceUnavailable
+GarageClient::GatewayTimeout
 ```
 
 ## Utility

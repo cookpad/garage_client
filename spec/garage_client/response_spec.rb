@@ -437,13 +437,13 @@ describe Faraday::Response do
       422 => GarageClient::UnprocessableEntity,
       500 => GarageClient::InternalServerError,
       503 => GarageClient::ServiceUnavailable,
+      504 => GarageClient::GatewayTimeout,
 
       402 => GarageClient::ClientError,
       405 => GarageClient::ClientError,
       407 => GarageClient::ClientError,
       408 => GarageClient::ClientError,
       502 => GarageClient::ServerError,
-      504 => GarageClient::ServerError,
     }.each do |status, exception|
       context "when HTTP status is #{status}" do
         before do
