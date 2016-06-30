@@ -15,6 +15,13 @@ require 'garage_client/response/raise_http_exception'
 require 'garage_client/resource'
 require 'garage_client/client'
 
+begin
+  require 'rails'
+rescue LoadError
+else
+  require 'garage_client/railtie'
+end
+
 module GarageClient
   class << self
     GarageClient::Configuration.keys.each do |key|
