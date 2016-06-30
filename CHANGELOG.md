@@ -1,3 +1,7 @@
+## 2.3.2
+- Automatically set `Rails.application.class.parent_name.underscore`
+  to `name` configuration in Rails by default.
+
 ## 2.3.1
 - Raise `GarageClient::GatewayTimeout` for 504 error
 
