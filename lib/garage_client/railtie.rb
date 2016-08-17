@@ -9,7 +9,7 @@ module GarageClient
     def self.set_default_name
       unless GarageClient.configuration.options[:name]
         GarageClient.configure do |c|
-          c.name = Rails.application.class.parent_name.underscore
+          c.name = ::Rails.application.class.parent_name.underscore
         end
       end
     end
