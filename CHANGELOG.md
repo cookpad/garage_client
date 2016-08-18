@@ -1,3 +1,7 @@
+## 2.3.3
+- Fix a bug to not resolve application name when garage_client-rails is bundled.
+- Stop to support ruby version < 2.2.2.
+
 ## 2.3.2
 - Automatically set `Rails.application.class.parent_name.underscore`
   to `name` configuration in Rails by default.
