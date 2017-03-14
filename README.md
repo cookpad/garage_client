@@ -93,6 +93,7 @@ There are the following options:
 - `adapter` - faraday adapter for http client (default: `:net_http`)
 - `cacher` - take a cacher class in which caching logic is defined (default: nil)
 - `name` - Client's application name, which is embedded in User-Agent by default (default: nil. For Rails, `Rails.application.class.parent_name.underscore` is set by default.)
+  - `name` must be configured globally.
 - `headers` - default http headers (default: `{ "Accept" => "application/json", "User-Agent" => "garage_client #{VERSION} #{name}" }`)
 - `endpoint` - Garage application API endpoint (default: nil)
 - `path_prefix` - API path prefix (default: `'/v1'`)
@@ -115,7 +116,6 @@ client = GarageClient::Client.new(
   adapter: :test,
   headers: { "Host" => "garage.example.com" },
   endpoint: "http://localhost:3000",
-  name: 'my-awesome-client',
   path_prefix: "/v2",
   verbose: true,
 )
