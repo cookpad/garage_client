@@ -20,6 +20,8 @@ module GarageClient
     property :path_prefix
     property :verbose
 
+    # @option opts [String] :target_service enable tracing and
+    #   set a logical name of the down stream service.
     def initialize(options = {})
       require_necessaries(options)
       @options = options
@@ -57,6 +59,8 @@ module GarageClient
 
     def connection
       Faraday.new(headers: headers, url: endpoint) do |builder|
+        builder.use Aws::Xray::Faraday, options[:target_service] if options[:target_service]
+
         # Response Middlewares
         builder.use Faraday::Response::Logger if verbose
         builder.use FaradayMiddleware::Mashify

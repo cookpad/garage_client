@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'hashie', '>= 1.2.0'
   s.add_dependency 'link_header'
 
+  s.add_dependency 'aws-xray'
   s.add_dependency 'system_timer' if RUBY_VERSION < '1.9'
 
   s.add_development_dependency "rails"

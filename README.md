@@ -98,6 +98,7 @@ There are the following options:
 - `endpoint` - Garage application API endpoint (default: nil)
 - `path_prefix` - API path prefix (default: `'/v1'`)
 - `verbose` - Enable verbose http log (default: `false`)
+- `target_service` - (client instance only) Enable distributed tracing and set a logical name of the down stream service.
 
 You can configure the global settings:
 
