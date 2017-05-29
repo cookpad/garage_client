@@ -32,4 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry"
   # Until bug fixed: https://github.com/colszowka/simplecov/issues/281
   s.add_development_dependency "simplecov", "~> 0.7.1"
+  s.add_development_dependency "aws-xray"
 end
