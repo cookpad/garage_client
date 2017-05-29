@@ -1,3 +1,6 @@
+## 2.4.0
+- Support distributed tracing.
+
 ## 2.3.3
 - Fix a bug to not resolve application name when garage_client-rails is bundled.
 - Stop to support ruby version < 2.2.2.
