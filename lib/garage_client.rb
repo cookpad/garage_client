@@ -1,7 +1,6 @@
 require 'active_support/all'
 require 'faraday'
 require 'faraday_middleware'
-require 'aws/xray'
 
 require 'garage_client/version'
 require 'garage_client/cachers/base'

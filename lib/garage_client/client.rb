@@ -20,8 +20,7 @@ module GarageClient
     property :path_prefix
     property :verbose
 
-    # @option opts [String] :target_service enable tracing and
-    #   set a logical name of the down stream service.
+    # @option opts [Hash] :tracing enable tracing. See README for detail.
     def initialize(options = {})
       require_necessaries(options)
       @options = options
@@ -59,7 +58,16 @@ module GarageClient
 
     def connection
       Faraday.new(headers: headers, url: endpoint) do |builder|
-        builder.use Aws::Xray::Faraday, options[:target_service] if options[:target_service]
+        if options[:tracing]
+          case options[:tracing][:tracer]
+          when 'aws-xray'
+            service = options[:tracing][:service]
+            raise 'Configure target service name with `tracing.service`' unless service
+            builder.use Aws::Xray::Faraday, service
+          else
+            raise "`tracing` option specified but GarageClient does not support the tracer: #{options[:tracing][:tracer]}"
+          end
+        end
 
         # Response Middlewares
         builder.use Faraday::Response::Logger if verbose

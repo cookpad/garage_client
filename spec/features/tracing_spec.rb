@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'aws/xray'
 
 RSpec.describe 'Tracing support' do
-  context 'when `target_service` option is specified' do
+  context 'when `tracing` option is specified' do
     around do |ex|
       Aws::Xray.config.client_options = { sock: io }
       Aws::Xray.trace(name: 'test-app') { ex.run }
@@ -12,7 +13,10 @@ RSpec.describe 'Tracing support' do
       GarageClient::Client.new(
         adapter: [:test, stubs],
         endpoint: 'http://127.0.0.1',
-        target_service: 'target-app',
+        tracing: {
+          tracer: 'aws-xray',
+          service: 'target-app',
+        },
       )
     end
     let(:stubs) do

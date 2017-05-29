@@ -98,7 +98,7 @@ There are the following options:
 - `endpoint` - Garage application API endpoint (default: nil)
 - `path_prefix` - API path prefix (default: `'/v1'`)
 - `verbose` - Enable verbose http log (default: `false`)
-- `target_service` - (client instance only) Enable distributed tracing and set a logical name of the down stream service.
+- `tracing` - (client instance only) Enable distributed tracing and set a logical name of the down stream service. See detail in "Tracing" section below.
 
 You can configure the global settings:
 
@@ -200,3 +200,17 @@ end
 
 GarageClient::Client.new(cacher: MyCacher)
 ```
+
+## Tracing
+GarageClient supports distributed tracing. To enable tracing, specify `tracing.tracer` option for `GarageClient::Client` instance.
+Choose one of supported tracers from below. If you want to add new tracer, please give us a PR.
+
+### aws-xray
+Bundle [aws-xray](https://github.com/taiki45/aws-xray) gem in your `Gemfile`, then configure `GarageClient::Client` instance with `tracing.service` option:
+
+```ruby
+require 'aws/xray'
+GarageClient::Client.new(..., tracing: { tracer: 'aws-xray', service: 'user' })
+```
+
+`service` will be `name` of the sub segments.
