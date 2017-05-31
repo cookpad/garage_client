@@ -21,13 +21,13 @@ RSpec.describe 'Tracing support' do
     end
     let(:stubs) do
       Faraday::Adapter::Test::Stubs.new do |stub|
-        stub.get('/campain') { |env| [200, {'Content-Type' => 'application/json'}, '{"campain": false}'] }
+        stub.get('/campaign') { |env| [200, {'Content-Type' => 'application/json'}, '{"campaign": false}'] }
       end
     end
 
     specify 'client enables tracing and sends trace data to a local agent' do
-      res = client.get('/campain')
-      expect(res.body.campain).to eq(false)
+      res = client.get('/campaign')
+      expect(res.body.campaign).to eq(false)
 
       io.rewind
       sent_jsons = io.read.split("\n")
@@ -39,12 +39,12 @@ RSpec.describe 'Tracing support' do
     context 'API returns client errors' do
       let(:stubs) do
         Faraday::Adapter::Test::Stubs.new do |stub|
-          stub.get('/campain') { |env| [404, {'Content-Type' => 'application/json'}, '{"error": "not_found"}'] }
+          stub.get('/campaign') { |env| [404, {'Content-Type' => 'application/json'}, '{"error": "not_found"}'] }
         end
       end
 
       specify 'client traces HTTP request and response and records errors' do
-        expect { client.get('/campain') }.to raise_error(GarageClient::NotFound)
+        expect { client.get('/campaign') }.to raise_error(GarageClient::NotFound)
 
         io.rewind
         sent_jsons = io.read.split("\n")
@@ -60,12 +60,12 @@ RSpec.describe 'Tracing support' do
     context 'API returns server errors' do
       let(:stubs) do
         Faraday::Adapter::Test::Stubs.new do |stub|
-          stub.get('/campain') { |env| [500, {'Content-Type' => 'application/json'}, '{"error": "internal_server_error"}'] }
+          stub.get('/campaign') { |env| [500, {'Content-Type' => 'application/json'}, '{"error": "internal_server_error"}'] }
         end
       end
 
       specify 'client traces HTTP request and response and marks as fault' do
-        expect { client.get('/campain') }.to raise_error(GarageClient::InternalServerError)
+        expect { client.get('/campaign') }.to raise_error(GarageClient::InternalServerError)
 
         io.rewind
         sent_jsons = io.read.split("\n")
