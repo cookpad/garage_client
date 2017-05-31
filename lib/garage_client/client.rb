@@ -58,17 +58,6 @@ module GarageClient
 
     def connection
       Faraday.new(headers: headers, url: endpoint) do |builder|
-        if options[:tracing]
-          case options[:tracing][:tracer]
-          when 'aws-xray'
-            service = options[:tracing][:service]
-            raise 'Configure target service name with `tracing.service`' unless service
-            builder.use Aws::Xray::Faraday, service
-          else
-            raise "`tracing` option specified but GarageClient does not support the tracer: #{options[:tracing][:tracer]}"
-          end
-        end
-
         # Response Middlewares
         builder.use Faraday::Response::Logger if verbose
         builder.use FaradayMiddleware::Mashify
@@ -80,6 +69,18 @@ module GarageClient
         builder.use Faraday::Request::Multipart
         builder.use GarageClient::Request::JsonEncoded
         builder.use GarageClient::Request::PropagateRequestId
+
+        # Tracing Middlewares
+        if options[:tracing]
+          case options[:tracing][:tracer]
+          when 'aws-xray'
+            service = options[:tracing][:service]
+            raise 'Configure target service name with `tracing.service`' unless service
+            builder.use Aws::Xray::Faraday, service
+          else
+            raise "`tracing` option specified but GarageClient does not support the tracer: #{options[:tracing][:tracer]}"
+          end
+        end
 
         # Low-level Middlewares
         apply_auth_middleware builder

@@ -35,5 +35,48 @@ RSpec.describe 'Tracing support' do
       body = JSON.parse(sent_jsons[1])
       expect(body['name']).to eq('target-app')
     end
+
+    context 'API returns client errors' do
+      let(:stubs) do
+        Faraday::Adapter::Test::Stubs.new do |stub|
+          stub.get('/campain') { |env| [404, {'Content-Type' => 'application/json'}, '{"error": "not_found"}'] }
+        end
+      end
+
+      specify 'client traces HTTP request and response and records errors' do
+        expect { client.get('/campain') }.to raise_error(GarageClient::NotFound)
+
+        io.rewind
+        sent_jsons = io.read.split("\n")
+        expect(sent_jsons.size).to eq(2)
+        body = JSON.parse(sent_jsons[1])
+        expect(body['name']).to eq('target-app')
+        expect(body['error']).to eq(true)
+        expect(body['http']['request']['method']).to eq('GET')
+        expect(body['http']['response']['status']).to eq(404)
+      end
+    end
+
+    context 'API returns server errors' do
+      let(:stubs) do
+        Faraday::Adapter::Test::Stubs.new do |stub|
+          stub.get('/campain') { |env| [500, {'Content-Type' => 'application/json'}, '{"error": "internal_server_error"}'] }
+        end
+      end
+
+      specify 'client traces HTTP request and response and marks as fault' do
+        expect { client.get('/campain') }.to raise_error(GarageClient::InternalServerError)
+
+        io.rewind
+        sent_jsons = io.read.split("\n")
+        expect(sent_jsons.size).to eq(2)
+        body = JSON.parse(sent_jsons[1])
+        expect(body['name']).to eq('target-app')
+        expect(body['error']).to eq(false)
+        expect(body['fault']).to eq(true)
+        expect(body['http']['request']['method']).to eq('GET')
+        expect(body['http']['response']['status']).to eq(500)
+      end
+    end
   end
 end
