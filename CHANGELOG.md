@@ -1,3 +1,6 @@
+## 2.4.1
+- Record http request/response even if API returns errors.
+
 ## 2.4.0
 - Support distributed tracing.
 
