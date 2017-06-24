@@ -5,6 +5,7 @@ RSpec.describe 'Tracing support' do
   context 'when `tracing` option is specified' do
     around do |ex|
       Aws::Xray.config.client_options = { sock: io }
+      Aws::Xray.config.sampling_rate = 1
       Aws::Xray.trace(name: 'test-app') { ex.run }
     end
 
