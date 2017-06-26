@@ -76,6 +76,7 @@ module GarageClient
           when 'aws-xray'
             service = options[:tracing][:service]
             raise 'Configure target service name with `tracing.service`' unless service
+            require 'aws/xray/faraday'
             builder.use Aws::Xray::Faraday, service
           else
             raise "`tracing` option specified but GarageClient does not support the tracer: #{options[:tracing][:tracer]}"

@@ -209,7 +209,7 @@ Choose one of supported tracers from below. If you want to add new tracer, pleas
 Bundle [aws-xray](https://github.com/taiki45/aws-xray) gem in your `Gemfile`, then configure `GarageClient::Client` instance with `tracing.service` option:
 
 ```ruby
-require 'aws/xray'
+require 'aws/xray/faraday'
 GarageClient::Client.new(..., tracing: { tracer: 'aws-xray', service: 'user' })
 ```
 
