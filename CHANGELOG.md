@@ -1,3 +1,6 @@
+## 2.4.2
+- Fixes for latest aws-xray gem. Require `aws/xray/faraday`.
+
 ## 2.4.1
 - Record http request/response even if API returns errors.
 
