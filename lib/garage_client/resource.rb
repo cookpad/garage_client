@@ -41,6 +41,8 @@ module GarageClient
         else
           value
         end
+      elsif query_method?(name)
+        data.__send__(name)
       elsif links.include?(name)
         path = data._links[name].href
         client.get(path, *args)
@@ -53,11 +55,20 @@ module GarageClient
     end
 
     def respond_to_missing?(name, include_private)
-      !!(properties.include?(name) || links.include?(name) || nested_resource_creation_method?(name))
+      !!(properties.include?(name) || query_method?(name) || links.include?(name) || nested_resource_creation_method?(name))
     end
 
     def nested_resource_creation_method?(name)
       !!(name =~ /\Acreate_(.+)\z/ && links.include?($1.to_sym))
+    end
+
+    private
+
+    def query_method?(name)
+      if name.to_s.end_with?('?')
+        key = name.to_s[0..-2]
+        properties.include?(key.to_sym)
+      end
     end
   end
 end
