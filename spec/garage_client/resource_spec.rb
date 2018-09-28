@@ -84,6 +84,12 @@ describe GarageClient::Resource do
         resource.user.should be_kind_of(GarageClient::Resource)
       end
     end
+
+    context 'with property query' do
+      it 'returns presence' do
+        resource.name?.should == true
+      end
+    end
   end
 
   describe 'link' do
