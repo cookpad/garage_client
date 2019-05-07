@@ -9,7 +9,13 @@ module GarageClient
     def self.set_default_name
       unless GarageClient.configuration.options[:name]
         GarageClient.configure do |c|
-          c.name = ::Rails.application.class.parent_name.underscore
+          klass = ::Rails.application.class
+          parent_name = if klass.respond_to?(:module_parent_name)
+            klass.module_parent_name
+          else
+            klass.parent_name
+          end
+          c.name = parent_name.underscore
         end
       end
     end
