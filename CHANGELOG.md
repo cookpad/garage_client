@@ -1,3 +1,7 @@
+## 2.4.3
+- Support query methods on GarageClient::Resource
+- Use Module#module_parent_name for Rails 6.0
+
 ## 2.4.2
 - Fixes for latest aws-xray gem. Require `aws/xray/faraday`.
 
