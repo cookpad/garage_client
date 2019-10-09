@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.authors       = ['Cookpad Inc.']
   s.email         = ['kaihatsu@cookpad.com']
 
-  s.add_dependency 'activesupport', '> 3.2.0'
   s.add_dependency 'faraday', '>= 0.8.0'
   s.add_dependency 'faraday_middleware'
   s.add_dependency 'hashie', '>= 1.2.0'

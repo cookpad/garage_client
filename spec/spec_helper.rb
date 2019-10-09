@@ -47,7 +47,7 @@ end
 def fixture(file)
   prefix = File.expand_path('../fixtures', __FILE__)
   path = File.join(prefix, file)
-  HashWithIndifferentAccess.new(YAML.load_file(path))
+  YAML.load_file(path)
 end
 
 RSpec.configure do |config|

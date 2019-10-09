@@ -75,7 +75,7 @@ describe GarageClient::Cachers::Base do
 
       it "load data" do
         expect(res).to be_instance_of Faraday::Response
-        expect(res.env[:body]).to eq fixture("example.yaml")[:body]
+        expect(res.env[:body]).to eq fixture("example.yaml")["body"]
       end
     end
 
@@ -86,7 +86,7 @@ describe GarageClient::Cachers::Base do
 
       it "load data" do
         expect(res).to be_instance_of Faraday::Response
-        expect(res.env[:body]).to eq fixture("example.yaml")[:body]
+        expect(res.env[:body]).to eq fixture("example.yaml")["body"]
       end
     end
   end
