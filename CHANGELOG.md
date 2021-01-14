@@ -1,3 +1,7 @@
+## 2.4.4
+- Remove activesupport dependency
+- Fix request ID not being propagated
+
 ## 2.4.3
 - Support query methods on GarageClient::Resource
 - Use Module#module_parent_name for Rails 6.0
