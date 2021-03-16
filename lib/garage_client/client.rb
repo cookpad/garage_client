@@ -27,7 +27,7 @@ module GarageClient
     end
 
     def headers
-      @headers ||= GarageClient.configuration.headers.merge(given_headers.stringify_keys)
+      @headers ||= GarageClient.configuration.headers.merge(given_headers.transform_keys(&:to_s))
     end
     alias :default_headers :headers
 
