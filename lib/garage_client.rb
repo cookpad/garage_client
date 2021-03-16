@@ -23,11 +23,15 @@ end
 
 module GarageClient
   class << self
-    GarageClient::Configuration.keys.each do |key|
-      delegate key, "#{key}=", to: :configuration
-    end
+    [*GarageClient::Configuration.keys, :default_headers].each do |key|
+      define_method(key) do
+        configuration.public_send(key)
+      end
 
-    delegate 'default_headers', 'default_headers=', to: :configuration
+      define_method("#{key}=") do |value|
+        configuration.public_send("#{key}=", value)
+      end
+    end
 
     def configuration
       @configuration ||= GarageClient::Configuration.new
