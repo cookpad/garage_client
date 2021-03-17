@@ -1,3 +1,7 @@
+## 2.4.5
+- Drop support for Ruby 2.5
+- Remove implicit dependency on Active Support
+
 ## 2.4.4
 - Remove activesupport dependency
 - Fix request ID not being propagated
