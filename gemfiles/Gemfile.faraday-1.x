@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'faraday', '~> 0.8.0'
+gem 'faraday', '~> 1'
 gemspec path: '../'
