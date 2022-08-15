@@ -17,7 +17,7 @@ jobs:
           - '3.0'
           - 'head'
         gemfile:
-          - 'gemfiles/Gemfile.faraday-0.8.x'
+          - 'gemfiles/Gemfile.faraday-0.x'
           - 'gemfiles/Gemfile.faraday-1.x'
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
