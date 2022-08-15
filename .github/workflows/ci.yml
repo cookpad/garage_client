@@ -16,8 +16,13 @@ jobs:
           - '2.7'
           - '3.0'
           - 'head'
+        gemfile:
+          - 'gemfiles/Gemfile.faraday-0.8.x'
+          - 'gemfiles/Gemfile.faraday-1.x'
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') }}
-    name: Run test with Ruby ${{ matrix.ruby }}
+    name: Run test with Ruby ${{ matrix.ruby }}, ${{ matrix.gemfile }}
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
