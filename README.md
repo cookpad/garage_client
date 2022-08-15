@@ -1,4 +1,4 @@
-# GarageClient [![Build Status](https://travis-ci.org/cookpad/garage_client.svg?branch=master)](https://travis-ci.org/cookpad/garage_client)
+# GarageClient [![Build Status](https://github.com/cookpad/garage_client/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/cookpad/garage_client/actions/workflows/ci.yml)
 GarageClient is a simple Ruby library to provide a primitive client interface to the Garage application API.
 
 ## Install
