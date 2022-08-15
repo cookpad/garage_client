@@ -53,7 +53,7 @@ module GarageClient
     end
 
     def apply_auth_middleware(faraday_builder)
-      faraday_builder.authorization :Bearer, access_token if access_token
+      faraday_builder.request :authorization, :Bearer, access_token if access_token
     end
 
     def connection
