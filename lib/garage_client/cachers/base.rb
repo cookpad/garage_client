@@ -9,15 +9,9 @@ module GarageClient
       def call
         response = store.read(key, options) if read_from_cache?
         if response
-          # Faraday::Response#marshal_dump is drop request object and url
-          # https://github.com/lostisland/faraday/blob/edacd5eb57ea13accab3097649690ae5f48f421a/lib/faraday/response.rb#L74
-          #
-          # XXX: We can't use #merge! here because Faraday::Env does not implement
-          # the method as same as Hash#merge! with Faraday v0.12.1.
-          @env.each do |k, v|
-            original = response.env[k]
-            response.env[k] = v if !original && v
-          end
+          # Faraday::Response#marshal_dump drops the request object
+          # https://github.com/lostisland/faraday/blob/cc5d60776645d3d341ff0f425c45b3b3d48d98e0/lib/faraday/response.rb#L70
+          response.env.merge!(@env)
         else
           response = yield
           store.write(key, response, options) if written_to_cache?

@@ -60,13 +60,13 @@ module GarageClient
       Faraday.new(headers: headers, url: endpoint) do |builder|
         # Response Middlewares
         builder.use Faraday::Response::Logger if verbose
-        builder.use FaradayMiddleware::Mashify
-        builder.use Faraday::Response::ParseJson, :content_type => /\bjson$/
+        builder.use Faraday::Mashify::Middleware
+        builder.use Faraday::Response::Json, content_type: /\bjson$/
         builder.use GarageClient::Response::Cacheable, cacher: cacher if cacher
         builder.use GarageClient::Response::RaiseHttpException
 
         # Request Middlewares
-        builder.use Faraday::Request::Multipart
+        builder.use Faraday::Multipart::Middleware
         builder.use GarageClient::Request::JsonEncoded
         builder.use GarageClient::Request::PropagateRequestId
 

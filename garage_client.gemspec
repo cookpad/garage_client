@@ -10,14 +10,15 @@ Gem::Specification.new do |s|
   s.description   = s.summary
 
   s.files         = `git ls-files`.split($\)
-  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.executables   = s.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
   s.authors       = ['Cookpad Inc.']
   s.email         = ['kaihatsu@cookpad.com']
 
-  s.add_dependency 'faraday', '>= 0.8.0'
-  s.add_dependency 'faraday_middleware'
+  s.add_dependency 'faraday', '>= 2.0.1'
+  s.add_dependency 'faraday-mashify'
+  s.add_dependency 'faraday-multipart'
   s.add_dependency 'hashie', '>= 1.2.0'
   s.add_dependency 'link_header'
 

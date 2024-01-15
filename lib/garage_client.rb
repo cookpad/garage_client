@@ -1,5 +1,6 @@
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/mashify'
+require 'faraday/multipart'
 
 require 'garage_client/version'
 require 'garage_client/cachers/base'

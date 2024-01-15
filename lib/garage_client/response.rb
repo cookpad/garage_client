@@ -11,11 +11,9 @@ module GarageClient
       @client = client
       @response = response
 
-      # Faraday's Net::Http adapter returns '' if response is nil.
-      # Changes from faraday v0.9.0. faraday/f41ffaabb72d3700338296c79a2084880e6a9843
-      #
-      # GarageClient::Response#body should be always a String when Faraday
-      # became v1.0.0. Because 0.9.0 seems to be not stable.
+      # faraday-net_http adapter converts the response body from nil to '' to ensure the body is a string.
+      # https://github.com/lostisland/faraday/commit/f41ffaabb72d3700338296c79a2084880e6a9843
+      # https://github.com/lostisland/faraday-net_http/blob/11953160f75dd488133a74857c2b07d41be8995d/lib/faraday/adapter/net_http.rb#L186
       response.env[:body] = nil if response.env[:body] == ''
 
       unless ACCEPT_BODY_TYPES.any? {|type| type === response.body }
