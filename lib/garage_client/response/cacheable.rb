@@ -1,8 +1,6 @@
-require "faraday_middleware"
-
 module GarageClient
   class Response
-    class Cacheable < Faraday::Response::Middleware
+    class Cacheable < Faraday::Middleware
       register_middleware cache: self
 
       def initialize(app, args)

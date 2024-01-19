@@ -1,9 +1,6 @@
-require 'garage_client/error'
-require 'faraday_middleware'
-
 module GarageClient
   class Response
-    class RaiseHttpException < Faraday::Response::Middleware
+    class RaiseHttpException < Faraday::Middleware
       ClientErrorStatuses = 400...500
       ServerErrorStatuses = 500...600
 
